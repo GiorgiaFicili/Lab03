@@ -16,14 +16,14 @@ public class Dictionary {
 	private List<String> linkedList;
 	
 	public Dictionary() {
-		
-		dictionary = new HashSet<>();
-		arrayList = new ArrayList<>();
-		linkedList = new LinkedList<>();
 
 	}
 	
 	public void loadDictionary(String language) {
+		
+		dictionary = new HashSet<>();
+		arrayList = new ArrayList<>();
+		linkedList = new LinkedList<>();
 		
 		if(language.equals("Italiano")) {
 			
@@ -197,30 +197,38 @@ public class Dictionary {
 
 		RichWord rw = null;
 		
-		String middle = linkedList.get(linkedList.size()/2);
 		
-		List<String> temp = new LinkedList<String>(linkedList);
 		
 		for(String s : inputTextList) {
+			
+			String middle = linkedList.get((linkedList.size())/2);
+			
+			List<String> temp = new LinkedList<String>(linkedList);
 						
 			boolean found = false;
 			
-			while(!found && (temp.size()/2>0)) {
+			while(!found) {
 				
 				if(s.equals(middle)) {
 					
 					rw = new RichWord(s, true);
 					found = true;
 					
-				} else if (s.compareTo(middle)<0) {
+				}
+				
+				if(temp.size()==1) {
+					break;
+				}
+				
+				if (s.compareTo(middle)<0) {
 					
 					temp = temp.subList(0, temp.indexOf(middle)-1);
-					middle = temp.get(temp.size()/2);
+					middle = temp.get((temp.size())/2);
 					
 				} else if (s.compareTo(middle)>0) {
 					
 					temp = temp.subList(temp.indexOf(middle)+1, temp.size()-1);
-					middle = temp.get(temp.size()/2);
+					middle = temp.get((temp.size())/2);
 					
 				}
 			
