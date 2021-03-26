@@ -192,107 +192,92 @@ public class Dictionary {
 		
 		//LinkedList
 		
-	
 		List<RichWord> richWords = new LinkedList<>();
 
 		RichWord rw = null;
-		
-		
+
 		
 		for(String s : inputTextList) {
 			
-			String middle = linkedList.get((linkedList.size())/2);
-			
-			List<String> temp = new LinkedList<String>(linkedList);
-						
 			boolean found = false;
+
+			int min = 0;
+			int max = linkedList.size()-1;
+			int middle = linkedList.size()/2;
 			
-			while(!found) {
+			while(min<=max) {
 				
-				if(s.equals(middle)) {
-					
-					rw = new RichWord(s, true);
+				if(s.equals(linkedList.get(middle))) {
+					rw = new RichWord(s,true);
 					found = true;
-					
-				}
-				
-				if(temp.size()==1) {
 					break;
+				} else if (s.compareTo(linkedList.get(middle))<0){
+					max = middle-1;
+					middle = (max+min)/2;
+				} else if (s.compareTo(linkedList.get(middle))>0) {
+					min = middle+1;
+					middle = (max+min)/2;
 				}
-				
-				if (s.compareTo(middle)<0) {
 					
-					temp = temp.subList(0, temp.indexOf(middle)-1);
-					middle = temp.get((temp.size())/2);
-					
-				} else if (s.compareTo(middle)>0) {
-					
-					temp = temp.subList(temp.indexOf(middle)+1, temp.size()-1);
-					middle = temp.get((temp.size())/2);
-					
-				}
-			
 			}
 			
 			if(!found) {
-				rw = new RichWord(s, false);
+				rw = new RichWord(s,false);
 			}
 			
 			richWords.add(rw);
+			
 		}
 		
 		return richWords;
-
 		
 		
+	
 		
 		
 		//ArrayList
 		
 		/*
 		
-		List<RichWord> richWordsA = new ArrayList<>();
+		List<RichWord> richWords = new LinkedList<>();
 
-		RichWord rwA = null;
-		
-		String middleA = linkedList.get(linkedList.size()/2);
-		
-		List<String> tempA = new LinkedList<String>(linkedList);
+		RichWord rw = null;
+
 		
 		for(String s : inputTextList) {
-						
+			
 			boolean found = false;
+
+			int min = 0;
+			int max = arrayList.size()-1;
+			int middle = arrayList.size()/2;
 			
-			while(!found && (tempA.size()/2!=0)) {
+			while(min!=max) {
 				
-				if(s.equals(middleA)) {
-					
-					rwA = new RichWord(s, true);
+				if(s.equals(arrayList.get(middle))) {
+					rw = new RichWord(s,true);
 					found = true;
-					
-				} else if (s.compareTo(middleA)<0) {
-					
-					tempA = tempA.subList(0, tempA.indexOf(middleA)-1);
-					middleA = tempA.get(tempA.size()/2);
-					
-				} else if (s.compareTo(middleA)>0) {
-					
-					tempA = tempA.subList(tempA.indexOf(middleA)+1, tempA.size()-1);
-					middleA = tempA.get(tempA.size()/2);
-					
+					break;
+				} else if (s.compareTo(arrayList.get(middle))<0){
+					max = middle-1;
+					middle = (max+min)/2;
+				} else if (s.compareTo(arrayList.get(middle))>0) {
+					min = middle+1;
+					middle = (max+min)/2;
 				}
-			
+					
 			}
 			
 			if(!found) {
-				rwA = new RichWord(s, false);
+				rw = new RichWord(s,false);
 			}
 			
-			richWordsA.add(rwA);
+			richWords.add(rw);
+			
 		}
 		
+		return richWords;
 		
-		return richWordsA;
 		
 		*/
 		
